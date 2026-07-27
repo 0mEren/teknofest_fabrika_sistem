@@ -1,0 +1,10 @@
+Tia PortalV14 ve üzeri
+Python3.10
+OpenCV (cv2)4.5.4
+NumPy1.26.4
+Pillow (PIL)9.0.1
+paho-mqtt2.1.0 (2.x zorunlu)
+pyserial3.5
+tkinter8.6 (Python ile gelir)
+mosquitto (broker)2.0.11
+ultralytics (YOLO)8.4.x
