@@ -6,17 +6,17 @@ class Client():
         self.client = client
         
 
-    def on_connect(client, userdata, flags, reason_code, properties):
+    def on_connect(self, client, userdata, flags, reason_code, properties):
         print(f"Baglanildi: {reason_code}")
         client.subscribe("test/topic")
-    def on_message(client, userdata, msg):
+    def on_message(self, client, userdata, msg):
         print(f"Mesaj: {msg.payload.decode()} konu:{msg.topic}")
 
 
     def setup(self):
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
-        self.connect("", 1883, 60)
+        self.client.connect("", 1883, 60)
         self.client.loop_forever()
 
 
