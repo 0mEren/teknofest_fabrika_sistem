@@ -62,6 +62,8 @@ class App:
         buton_bas_git.grid(row=1, column = 1, )
         buton_kayitli_git.grid(row=1, column = 2, )
 
+
+    #JSON kaydet
     def json_kaydet(self, mode):
         
         if mode:
@@ -86,7 +88,7 @@ class App:
             with open(json_yolu, "w", encoding="utf-8") as dosya:
                 json.dump(veri, dosya, indent = 4)
             self.serial_yolla("KONUM " + str(self.motorkonumu))
-
+    #JSON oku
     def json_yukle(self):
         try:
             with open(json_yolu, "r", encoding="utf-8") as dosya:
@@ -96,6 +98,10 @@ class App:
         except:
             self.baslangic = 0
             self.hedef = 0
+
+
+    #SERIAL iletisimi icin fonksiyonlar
+
     def serial_baslat(self):
         if SERIAL_CONNECTION and SERIAL_CONNECTION.is_open:
             self.thread = threading.Thread(
@@ -112,6 +118,8 @@ class App:
                 print(f"{e}")
 
 
+
+    #veri akisi icin queue mantigi, sirala komut ceker
     def sira_kontrol(self):
         while not self.veri_sirasi.empty():
             durum,konum = self.veri_sirasi.get_nowait()
@@ -123,7 +131,7 @@ class App:
 
         self.root.after(50, self.sira_kontrol)
 
-    
+    #serialdan alinan veriyi isleme fonksiyonu. String isler, ideal olmasa da karakter tanimayla yapildi
     def serial_yakala(self):
         while not self.dur_event.is_set():
             if SERIAL_CONNECTION and SERIAL_CONNECTION.in_waiting > 0:
@@ -140,6 +148,7 @@ class App:
                     konum_idx = veri.find("KONUM")
                     durum_idx = veri.find("DURUM")
 
+                    #burada konum veya durum verisi update almama  ihtimali -1
                     if konum_idx != -1:
                         try:
                             konum_str = veri.split(":", 1)[1].strip()
@@ -175,7 +184,7 @@ class App:
 
 
 
-
+# Bu fonksiyon portlarin sabit olmama ihtimaline karsi arduinoyu aramak icin tanimlandi
 def arduino_ara():
     
     ports = serial.tools.list_ports.comports()

@@ -1,5 +1,7 @@
 #include<AccelStepper.h>
 
+//Tum pinler, spd rastgele deger icin sayi secmesi adina rastgele bir analog pine atandi,
+//pinden gelen noise sayi uretimini sagliyor
 int PULpin = 2;
 int DIRpin = 3;
 int spd = A0;
@@ -7,6 +9,8 @@ int spd = A0;
 int pd = 500;
 int spr = 1600;
 int rpm = 10;
+
+//python koduyla iletisim
 const unsigned long RAPOR_PERIYODU = 100;
 unsigned long son = 0;
 
@@ -25,6 +29,7 @@ void setdir_change(){
     setdir = !setdir;
 }
 
+//rastgele hizlanma saglamak adina fonksiyon
 void random_yon(){
     int dir = random(0, 2) == 0 ? 1 : -1;
     float rev_saniye = random(25, 150) / 100.0;
@@ -33,6 +38,8 @@ void random_yon(){
     mod = SERBEST;
 }
 
+
+//Pythondan gelen komutlarin taninmasi ve gorev secimi
 void komutIsle(String komut){
     komut.trim();
     if(komut == "BASLA"){
@@ -54,6 +61,8 @@ void komutIsle(String komut){
 
 }
 
+
+//MOTOR GOREVLERI
 void motoruDurdur(){
     stepper.setSpeed(0);
     stepper.stop();
@@ -68,6 +77,8 @@ void hedefeGit(long hedef){
     mod = HEDEF;
 }
 
+
+//arayuz icin bilgi
 void durumYolla(){
     Serial.print("KONUM: ");
     Serial.println(stepper.currentPosition());
