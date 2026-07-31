@@ -2,6 +2,8 @@ import cv2
 import numpy as np
 #r_alt = np.array(
 #r_ust = np.array(
+
+#kirmizi hue spektrumunu arkadan sariyor, iki aralik
 r_dusukh_alt = np.array([0,120,70])
 r_dusukh_ust = np.array([10,255,255])
 r_yuksekh_alt = np.array([170,120,70])
@@ -45,6 +47,7 @@ class HSV_Algila:
         for contour in rkontur:
             x, y, w, h = cv2.boundingRect(contour)
             if cv2.contourArea(contour) > 500: 
+                #merkez bulma
                 print(f"RED at {x+(w/2)}, {y+(h/2)}")
                 cv2.putText(cikti, "RED", (x,y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
                 cv2.rectangle(cikti, (x, y), (x + w, y + h), (0, 255, 0), 2) 
@@ -53,6 +56,7 @@ class HSV_Algila:
             x, y, w, h = cv2.boundingRect(contour)
             
             if cv2.contourArea(contour) > 500: 
+                #merkez bulma
                 print(f"GREEN at {x+(w/2)}, {y+(h/2)}")
                 cv2.putText(cikti, "GREEN", (x,y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
                 cv2.rectangle(cikti, (x, y), (x + w, y + h), (0, 255, 0), 2) 
