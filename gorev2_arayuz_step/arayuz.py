@@ -7,7 +7,7 @@ import queue
 import json
 
 SERIAL_CONNECTION = None
-json_yolu = "/home/modus/fabrika_ws/gorev2_arayuz_step/konumlar.json"
+json_yolu = "konumlar.json"
 
 
 class App:
