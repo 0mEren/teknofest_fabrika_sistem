@@ -32,4 +32,5 @@ class Detector:
 
 if __name__ == "__main__":
     det = Detector(model_yol="best.pt")
+    det.detect(camera_i = 0)
 
