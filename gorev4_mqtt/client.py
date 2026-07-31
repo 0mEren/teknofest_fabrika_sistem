@@ -16,6 +16,8 @@ class Client():
     def setup(self):
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
+
+        #burada hedef ip olmali
         self.client.connect("", 1883, 60)
         self.client.loop_forever()
 

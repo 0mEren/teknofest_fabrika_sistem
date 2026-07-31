@@ -1,5 +1,6 @@
 import paho.mqtt.client as mqtt
 import time
+from random import randint
 
 class Broker():
     def __init__(self, client):
@@ -7,11 +8,22 @@ class Broker():
        
 
     def setup(self):
+        #brokeri ayni cihaza kurdugumuzdan localhost olur
         self.client.connect("localhost", 1883, 60)
         self.client.loop_start()
         try:
             while True:
-                msg = "TEST"
+                a = randint(0,2)
+                msg = ""
+                match a:
+                    case 0:
+                        msg = "BLUE"
+                    case 1:
+                        msg = "GREEN"
+                    case 2:
+                        msg = "RED"
+
+                print(f"YOLLANIYOR: {msg}")
                 self.client.publish("test/topic", msg, qos =1)
                 time.sleep(5)
         except KeyboardInterrupt:
